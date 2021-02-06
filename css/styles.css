@@ -1,0 +1,11 @@
+/*If you need to add extra style put it here*/
+ .input-container {
+	 padding: 20px 30% 20px 30%;
+ }
+
+ @media (max-width: 800px) {
+	.input-container {
+		padding-left: 0;
+		padding-right: 0;
+	}
+  }
