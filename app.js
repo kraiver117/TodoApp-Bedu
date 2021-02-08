@@ -10,13 +10,15 @@ class Todo {
 
 //Class to create, delete and mark as complete the TODOS
 class TodoList {
-  constructor() {
-    this.todos = [];
-  }
+    constructor() {
+        this.todos = [];
+        this.showTodo();
+    }
 
-  addTodo(todo) {
-    this.todos.push(todo);
-  }
+    addTodo(todo){
+        this.todos.push(todo);
+        this.saveTodo();
+    }
 
   deleteTodo(id) {
     this.todos = this.todos.filter((todo) => {
@@ -25,10 +27,25 @@ class TodoList {
   }
 
   toggleTodo(id) {}
+
+    saveTodo() {
+        localStorage.setItem('todo', JSON.stringify(this.todos));
+    }
+
+    showTodo() {
+        if(localStorage.getItem('todo')) {
+            this.todos = JSON.parse(localStorage.getItem('todo'));
+        } else {
+            this.todos = [];
+        }
+    }
+
+
 }
 
 //Instance of todoList class
 const todoList = new TodoList();
+console.log(todoList)
 
 //Styles
 //For the styles we use Bootstrap
@@ -98,11 +115,13 @@ addTodoButton.addEventListener("click", (event) => {
 });
 
 ///Add todo using Enter Key
-taskInput.addEventListener("keyup", (event) => {
-  if (event.keyCode == 13 && taskInput.value.length > 0) {
-    printTodo(taskInput);
-  }
-});
+
+taskInput.addEventListener('keyup', (event) => {
+    if (event.keyCode == 13 && taskInput.value.length > 0) {
+        printTodo(taskInput);
+    }
+})
+
 
 //-------Delete TODO-------//
 divTodoList.addEventListener('click',function (event) {
@@ -119,3 +138,6 @@ divTodoList.addEventListener('click',function (event) {
     };
 });
   
+
+// Insert elements from localstorage
+todoList.todos.forEach(todo => createTodoHTML(todo));
