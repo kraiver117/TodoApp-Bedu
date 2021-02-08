@@ -64,7 +64,7 @@ app.appendChild(divTodoList);
 const createTodoHTML = (todo) => {
     const htmlTodo = `<li class="${todo.completed ? "completed" : ""}" data-id="${todo.id}">
         <div class="view container">
-            <input class="toggle" type="checkbox" ${todo.completed ? "checked" : ""}>
+            <input class="form-check-input" type="checkbox" ${todo.completed ? "checked" : ""}>
             <label>${todo.todo}</label>
             <button id='delete-todo' class="btn btn-danger" >Eliminar</button>
         </div>
@@ -102,4 +102,21 @@ taskInput.addEventListener('keyup', (event) => {
     }
 })
 
-//------------------------//
+
+
+//------completed_task---------//
+
+
+divTodoList.addEventListener('click',function (event) {
+    
+
+    if(event.target.checked == true){
+        event.target.nextElementSibling.style.textDecoration = 'line-through'; 
+        console.log(input.id);
+    } 
+
+    if(!event.target.checked){
+        event.target.nextElementSibling.style.textDecoration = 'none';        
+    }  
+});
+
