@@ -24,6 +24,7 @@ class TodoList {
     this.todos = this.todos.filter((todo) => {
         return todo.id !== id;
     });
+    this.saveTodo();
   }
 
   toggleTodo(id) {}
