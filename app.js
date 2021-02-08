@@ -12,10 +12,12 @@ class Todo {
 class TodoList {
     constructor() {
         this.todos = [];
+        this.showTodo();
     }
 
     addTodo(todo){
         this.todos.push(todo);
+        this.saveTodo();
     }
 
     deleteTodo(id){
@@ -26,10 +28,23 @@ class TodoList {
 
     }
 
+    saveTodo() {
+        localStorage.setItem('todo', JSON.stringify(this.todos));
+    }
+
+    showTodo() {
+        if(localStorage.getItem('todo')) {
+            this.todos = JSON.parse(localStorage.getItem('todo'));
+        } else {
+            this.todos = [];
+        }
+    }
+
 }
 
 //Instance of todoList class
 const todoList = new TodoList();
+console.log(todoList)
 
 //Styles 
 //For the styles we use Bootstrap
@@ -103,3 +118,6 @@ taskInput.addEventListener('keyup', (event) => {
 })
 
 //------------------------//
+
+// Insert elements from localstorage
+todoList.todos.forEach(todo => createTodoHTML(todo));
