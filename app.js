@@ -111,11 +111,10 @@ divTodoList.addEventListener('click',function (event) {
     
 
     if(event.target.checked == true){
-        event.target.nextElementSibling.style.textDecoration = 'line-through'; 
-        console.log(input.id);
-    } 
-
-    if(!event.target.checked){
+        event.target.nextElementSibling.style.textDecoration = 'line-through'; //line-through
+        id_Task = event.target.parentElement.parentElement.getAttribute('data-id'); // Obtenemos el id de la task
+        console.log(id_Task)  
+    } else {
         event.target.nextElementSibling.style.textDecoration = 'none';        
     }  
 });
