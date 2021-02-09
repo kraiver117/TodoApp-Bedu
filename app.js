@@ -27,7 +27,14 @@ class TodoList {
     this.saveTodo();
   }
 
-  toggleTodo(id) {}
+  toggleTodo(id) {
+    for (const todo of this.todos) {
+      if(todo.id == id){
+        todo.completed = !todo.completed
+      }
+    }
+    this.saveTodo();
+  }
 
     saveTodo() {
         localStorage.setItem('todo', JSON.stringify(this.todos));
@@ -46,7 +53,6 @@ class TodoList {
 
 //Instance of todoList class
 const todoList = new TodoList();
-console.log(todoList)
 
 //Styles
 //For the styles we use Bootstrap
@@ -123,38 +129,26 @@ taskInput.addEventListener('keyup', (event) => {
     }
 })
 
+//-------Delete and Completed-------//
 
-
-//------completed_task---------//
-
-
-divTodoList.addEventListener('click',function (event) {
-    
-
-    if(event.target.checked == true){
-        event.target.nextElementSibling.style.textDecoration = 'line-through'; //line-through
-        id_Task = event.target.parentElement.parentElement.getAttribute('data-id'); // Obtenemos el id de la task
-        console.log(id_Task)  
-    } else {
-        event.target.nextElementSibling.style.textDecoration = 'none';        
-    }  
-});
-
-
-
-//-------Delete TODO-------//
 divTodoList.addEventListener('click',function (event) {
     
     if(event.target.nodeName === 'BUTTON') { // click on button 'Eliminar'
-
         const liTodo = event.target.parentElement.parentElement; // Select li parent of button
         const nodesdivTodoList = Array.from( this.children );  // Array of childres
         const indexliTodo = nodesdivTodoList.indexOf( liTodo ); // Select index
         const idTodo = liTodo.getAttribute('data-id'); // Get id
         todoList.deleteTodo(parseInt(idTodo)); // Delete toto by id
         this.removeChild(this.childNodes[indexliTodo]); // remove Todo
+    }
 
-    };
+    if(event.target.checked == true){
+        event.target.nextElementSibling.style.textDecoration = 'line-through'; //line-through
+        id_Task = event.target.parentElement.parentElement.getAttribute('data-id'); // Obtenemos el id de la task
+        todoList.toggleTodo(id_Task)
+    } else {
+        event.target.nextElementSibling.style.textDecoration = 'none';        
+    }  
 });
   
 
