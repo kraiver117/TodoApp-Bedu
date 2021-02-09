@@ -124,6 +124,24 @@ taskInput.addEventListener('keyup', (event) => {
 })
 
 
+
+//------completed_task---------//
+
+
+divTodoList.addEventListener('click',function (event) {
+    
+
+    if(event.target.checked == true){
+        event.target.nextElementSibling.style.textDecoration = 'line-through'; //line-through
+        id_Task = event.target.parentElement.parentElement.getAttribute('data-id'); // Obtenemos el id de la task
+        console.log(id_Task)  
+    } else {
+        event.target.nextElementSibling.style.textDecoration = 'none';        
+    }  
+});
+
+
+
 //-------Delete TODO-------//
 divTodoList.addEventListener('click',function (event) {
     
@@ -142,3 +160,4 @@ divTodoList.addEventListener('click',function (event) {
 
 // Insert elements from localstorage
 todoList.todos.forEach(todo => createTodoHTML(todo));
+
